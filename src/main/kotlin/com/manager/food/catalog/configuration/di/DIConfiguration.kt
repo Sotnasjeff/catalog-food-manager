@@ -10,9 +10,9 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
 @ExperimentalCoroutinesApi
-val configurationModule = Kodein.Module("configuration"){
+val configurationModule = Kodein.Module("configuration") {
     bind<HoconApplicationConfig>() with singleton { HoconApplicationConfig(ConfigFactory.load()) }
     bind() from instance(configureObjectMapper())
     import(metricsConfiguration)
-
+    import(serviceConfiguration)
 }

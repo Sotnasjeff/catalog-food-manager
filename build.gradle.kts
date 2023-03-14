@@ -7,6 +7,8 @@ val slf4j_version: String by project
 val disruptor_version: String by project
 val prometheus_version: String by project
 val jackson_datatype_version: String by project
+val postgres_version: String by project
+val hikari_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -30,8 +32,13 @@ repositories {
 }
 
 dependencies {
+    //Database
+    implementation("org.postgresql:postgresql:$postgres_version")
+    implementation("com.zaxxer:HikariCP:$hikari_version")
+
     //Core
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+
     //DI
     implementation("org.kodein.di:kodein-di-generic-jvm:$kodein_version")
 
@@ -60,6 +67,7 @@ dependencies {
     implementation("io.ktor:ktor-server-metrics-micrometer:$ktor_version")
     implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
 
+    //Test
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

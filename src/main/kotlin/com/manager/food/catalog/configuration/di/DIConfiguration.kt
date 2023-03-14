@@ -15,4 +15,7 @@ val configurationModule = Kodein.Module("configuration") {
     bind() from instance(configureObjectMapper())
     import(metricsConfiguration)
     import(serviceConfiguration)
+    import(databaseConnectionConfiguration)
+    import(repositoryConfiguration)
+    import(propertiesConfiguration)
 }

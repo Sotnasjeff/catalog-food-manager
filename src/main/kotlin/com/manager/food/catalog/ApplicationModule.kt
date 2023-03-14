@@ -3,6 +3,7 @@ package com.manager.food.catalog
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.manager.food.catalog.log.installLogInterceptor
 import com.manager.food.catalog.web.headers.installHeaderInterceptors
+import com.manager.food.catalog.web.route.v1.catalogFoodRoutes
 import com.manager.food.catalog.web.route.v1.helloWorldRoute
 import io.ktor.http.ContentType
 import io.ktor.serialization.jackson.JacksonConverter
@@ -42,7 +43,7 @@ fun Application.applicationRoutesModule(kodein: Kodein) {
     }
 
     val metricRegistry: MeterRegistry by kodein.instance()
-    install(MicrometerMetrics){
+    install(MicrometerMetrics) {
         registry = metricRegistry
         distributionStatisticConfig = DistributionStatisticConfig.Builder()
             .percentilesHistogram(true)
@@ -60,6 +61,7 @@ fun Application.applicationRoutesModule(kodein: Kodein) {
         installHeaderInterceptors()
         installLogInterceptor()
         helloWorldRoute(kodein)
+        catalogFoodRoutes(kodein)
     }
 
 }
